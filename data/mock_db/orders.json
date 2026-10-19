@@ -1,0 +1,146 @@
+[
+  {
+    "order_id": "ORD-1001",
+    "customer_name": "Alice Carter",
+    "store_id": "STORE-NYC-01",
+    "channel": "In-Store",
+    "item": {
+      "product_id": "PROD-101",
+      "name": "BrewMaster Pro Espresso Machine",
+      "category": "Home & Kitchen",
+      "price": 120.00,
+      "quantity": 1
+    },
+    "purchase_or_delivery_date": "2026-10-08",
+    "status": "Delivered",
+    "condition_reported": "Unopened",
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1002",
+    "customer_name": "Marcus Vance",
+    "store_id": "STORE-NYC-01",
+    "channel": "Online",
+    "item": {
+      "product_id": "PROD-202",
+      "name": "NovaAir FPV Drone 4K",
+      "category": "Electronics",
+      "price": 450.00,
+      "quantity": 1
+    },
+    "purchase_or_delivery_date": "2026-10-10",
+    "status": "Delivered",
+    "condition_reported": "Opened - Non-Defective",
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1003",
+    "customer_name": "Elena Rostova",
+    "store_id": "STORE-NYC-01",
+    "channel": "Online",
+    "item": {
+      "product_id": "PROD-202",
+      "name": "NovaAir FPV Drone 4K",
+      "category": "Electronics",
+      "price": 450.00,
+      "quantity": 1
+    },
+    "purchase_or_delivery_date": "2026-09-25",
+    "status": "Delivered",
+    "condition_reported": "Defective Motor",
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1004",
+    "customer_name": "David Kim",
+    "store_id": "STORE-NYC-01",
+    "channel": "Online",
+    "item": {
+      "product_id": "PROD-101",
+      "name": "BrewMaster Pro Espresso Machine",
+      "category": "Home & Kitchen",
+      "price": 120.00,
+      "quantity": 1
+    },
+    "purchase_or_delivery_date": "2026-10-16",
+    "status": "Delivered",
+    "condition_reported": "Damaged in Transit - Cracked Water Tank",
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1005",
+    "customer_name": "Sophia Martinez",
+    "store_id": "STORE-NYC-01",
+    "channel": "Online",
+    "item": {
+      "product_id": "PROD-303",
+      "name": "VisionMax 65\" 4K OLED Smart TV",
+      "category": "Electronics",
+      "price": 1200.00,
+      "quantity": 1,
+      "serial_number": "SN-TV65-99881"
+    },
+    "purchase_or_delivery_date": "2026-10-15",
+    "status": "Delivered",
+    "condition_reported": "Damaged in Transit - Shattered Panel",
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1006",
+    "customer_name": "Liam O'Connor",
+    "store_id": "STORE-NYC-01",
+    "channel": "Online",
+    "item": {
+      "product_id": "PROD-505",
+      "name": "SonicPulse Pro In-Ear Wireless Earbuds",
+      "category": "Audio / Personal Care",
+      "price": 160.00,
+      "quantity": 1
+    },
+    "purchase_or_delivery_date": "2026-10-15",
+    "status": "Delivered",
+    "carrier_tracking_status": "Delivered",
+    "hours_since_delivery_scan": 72,
+    "condition_reported": "Lost Package - Customer States Never Received",
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1007",
+    "customer_name": "Hannah Abbott",
+    "store_id": "STORE-NYC-01",
+    "channel": "BOPIS",
+    "item": {
+      "product_id": "PROD-404",
+      "name": "Heritage Pre-Seasoned Cast Iron Cocotte",
+      "category": "Home & Kitchen",
+      "price": 85.00,
+      "quantity": 1
+    },
+    "ready_for_pickup_date": "2026-10-14",
+    "bopis_hold_days": 5,
+    "hold_expires_end_of_date": "2026-10-19",
+    "status": "Ready for Pickup",
+    "extension_granted": false,
+    "has_receipt": true
+  },
+  {
+    "order_id": "ORD-1008",
+    "customer_name": "Noah Williams",
+    "store_id": "STORE-NYC-01",
+    "channel": "Online",
+    "item": {
+      "product_id": "PROD-606",
+      "name": "Nordic Winter Parka (Clearance - 60% Off)",
+      "category": "Apparel (Final Sale)",
+      "price": 64.00,
+      "original_price": 160.00,
+      "discount_percent": 60,
+      "final_sale": true,
+      "quantity": 1
+    },
+    "purchase_or_delivery_date": "2026-10-14",
+    "status": "Delivered",
+    "condition_reported": "Unopened - Wrong Size",
+    "has_receipt": true
+  }
+]

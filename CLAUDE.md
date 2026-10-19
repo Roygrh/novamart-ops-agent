@@ -90,3 +90,137 @@ Do NOT include any information in the policy documents about:
 - Employee HR policies (paid time off, sick leave, payroll, shift scheduling, dress code, employee discount rates).
 - IT hardware troubleshooting for store POS terminals, barcode scanners, or Wi-Fi routers.
 - Corporate B2B wholesale contracts.
+
+## 6. Mock Database Specification (`data/mock_db/`)
+To make all tests and evaluations 100% deterministic regardless of when the repository is executed, use a fixed reference date across the system:
+- `REFERENCE_DATE = "2026-10-18"`
+
+Create three JSON files inside `data/mock_db/`:
+
+### 6.1. `data/mock_db/orders.json`
+Include these 8 canonical orders designed to test every policy intersection:
+1. `ORD-1001`:
+   - Customer: "Alice Carter" | Store: `STORE-NYC-01` | Channel: `In-Store`
+   - Item: `PROD-101` (BrewMaster Pro Espresso Machine, `$120.00`, Category: `Home & Kitchen`)
+   - Purchase/Delivery Date: `"2026-10-08"` (10 days ago relative to `2026-10-18`)
+   - Status: `"Delivered"` | Condition Reported: `"Unopened"` | Has Receipt: `true`
+   - Expected Policy Outcome: Eligible for full `$120.00` refund to original payment method in-store (`POL-RET-001`, within 30-day window). Do NOT escalate.
+2. `ORD-1002`:
+   - Customer: "Marcus Vance" | Store: `STORE-NYC-01` | Channel: `Online`
+   - Item: `PROD-202` (NovaAir FPV Drone 4K, `$450.00`, Category: `Electronics`)
+   - Purchase/Delivery Date: `"2026-10-10"` (8 days ago)
+   - Status: `"Delivered"` | Condition Reported: `"Opened - Non-Defective"` | Has Receipt: `true`
+   - Expected Policy Outcome: Eligible for return in-store (`POL-ELC-002`, within 15-day window), subject to a **15% open-box restocking fee** (`$67.50` fee -> `$382.50` net refund). Must use ground hazmat handling if shipped (`PRD-CAT-006`). Do NOT escalate.
+3. `ORD-1003`:
+   - Customer: "Elena Rostova" | Store: `STORE-NYC-01` | Channel: `Online`
+   - Item: `PROD-202` (NovaAir FPV Drone 4K, `$450.00`, Category: `Electronics`)
+   - Purchase/Delivery Date: `"2026-09-25"` (23 days ago)
+   - Status: `"Delivered"` | Condition Reported: `"Defective Motor"` | Has Receipt: `true`
+   - Expected Policy Outcome: Store return declined (`POL-ELC-002`, past the 15-calendar-day electronics window). Direct customer to the 1-year manufacturer warranty. Do NOT escalate to Operations (`SOP-OPS-007`).
+4. `ORD-1004`:
+   - Customer: "David Kim" | Store: `STORE-NYC-01` | Channel: `Online`
+   - Item: `PROD-101` (BrewMaster Pro Espresso Machine, `$120.00`, Category: `Home & Kitchen`)
+   - Purchase/Delivery Date: `"2026-10-16"` (2 days ago)
+   - Status: `"Delivered"` | Condition Reported: `"Damaged in Transit - Cracked Water Tank"` | Has Receipt: `true`
+   - Expected Policy Outcome: Item value is `<= $150.00` (`$120.00`). Under `POL-ORD-003` and `SOP-OPS-007`, the store associate resolves this directly at the POS (immediate replacement or full refund) WITHOUT escalating to Operations.
+5. `ORD-1005`:
+   - Customer: "Sophia Martinez" | Store: `STORE-NYC-01` | Channel: `Online`
+   - Item: `PROD-303` (VisionMax 65" 4K OLED Smart TV, `$1,200.00`, Category: `Electronics`, Serial: `SN-TV65-99881`)
+   - Purchase/Delivery Date: `"2026-10-15"` (3 days ago)
+   - Status: `"Delivered"` | Condition Reported: `"Damaged in Transit - Shattered Panel"` | Has Receipt: `true`
+   - Expected Policy Outcome: Item value is `> $150.00` (`$1,200.00`). Under `POL-ORD-003` and `SOP-OPS-007`, associate CANNOT override at POS and MUST create an Operations Escalation Ticket with `issue_category: "DAMAGED_IN_TRANSIT_HIGH_VALUE"` and `policy_id: "POL-ORD-003"`.
+6. `ORD-1006`:
+   - Customer: "Liam O'Connor" | Store: `STORE-NYC-01` | Channel: `Online`
+   - Item: `PROD-505` (SonicPulse Pro In-Ear Wireless Earbuds, `$160.00`, Category: `Audio / Personal Care`)
+   - Purchase/Delivery Date: `"2026-10-15"` (Delivered scan 72 hours ago)
+   - Status: `"Delivered"` | Condition Reported: `"Lost Package - Customer States Never Received"` | Hours Since Delivery Scan: `72`
+   - Expected Policy Outcome: More than 24 hours have passed since carrier `Delivered` scan (`POL-ORD-003`). Associate MUST create an Operations Escalation Ticket with `issue_category: "LOST_PACKAGE"` and `policy_id: "POL-ORD-003"`.
+7. `ORD-1007`:
+   - Customer: "Hannah Abbott" | Store: `STORE-NYC-01` | Channel: `BOPIS`
+   - Item: `PROD-404` (Heritage Pre-Seasoned Cast Iron Cocotte, `$85.00`, Category: `Home & Kitchen`)
+   - Ready for Pickup Date: `"2026-10-14"` (Day 4 of 5-day BOPIS hold window; expires end of `"2026-10-19"`)
+   - Status: `"Ready for Pickup"` | Extension Granted: `false`
+   - Expected Policy Outcome: Eligible for a one-time 48-hour hold extension in-store (`POL-ORD-003`) without contacting Operations.
+8. `ORD-1008`:
+   - Customer: "Noah Williams" | Store: `STORE-NYC-01` | Channel: `Online`
+   - Item: `PROD-606` (Nordic Winter Parka - Clearance 60% Off, `$64.00`, Category: `Apparel (Final Sale)`)
+   - Purchase/Delivery Date: `"2026-10-14"` (4 days ago)
+   - Status: `"Delivered"` | Condition Reported: `"Unopened - Wrong Size"` | Has Receipt: `true`
+   - Expected Policy Outcome: Strictly non-returnable and non-refundable because it is marked `Final Sale` with >= 50% discount and is NOT damaged (`POL-RES-004`). Decline return in-store; do NOT escalate.
+
+### 6.2. `data/mock_db/inventory.json`
+Include store stock counts for `STORE-NYC-01` and competitor pricing for `PROD-101` through `PROD-606` so the agent can verify Price Match requests (`POL-PRC-005`):
+- Include an example where `PROD-101` ($120.00) is listed at `$105.00` on `Best Buy` (In Stock, eligible for price match) and `$95.00` on a third-party Amazon Marketplace seller (Ineligible per `POL-PRC-005` because it is not Sold and Shipped by Amazon.com).
+
+### 6.3. `data/mock_db/escalation_tickets.json`
+Initialize as an empty JSON array `[]` (or read/write safely in memory/disk) to store tickets generated by `create_ops_escalation_ticket`.
+
+## 7. Agent & Tooling Implementation Specification (`novamart_agent/`)
+
+### 7.1. `novamart_agent/knowledge_base.py`
+Build a lightweight, deterministic local retrieval module over `data/policies/*.md`:
+- Parse each Markdown file into logical sections (by `## ` headings) while preserving document-level metadata (`Policy ID`, `Filename`, `Title`, `Summary`).
+- Use `rank_bm25` (BM25Okapi) combined with exact token/ID boosting (so queries mentioning `POL-ELC-002`, `PROD-303`, `BOPIS`, or `restocking` rank the exact section at the top).
+- Expose a clean function `retrieve_policy_sections(query: str, top_k: int = 4) -> list[dict]` returning `policy_id`, `filename`, `section_title`, and `content`.
+
+### 7.2. `novamart_agent/tools.py`
+Implement 4 well-typed Python tool functions with clear docstrings (Google ADK inspects function signatures and docstrings for tool calling):
+1. `search_policy_docs(query: str) -> dict`:
+   - Searches NovaMart's official policy and product documentation (`data/policies/`) and returns the top matching policy sections with their `policy_id` and section numbers.
+2. `get_order_status(order_id: str) -> dict`:
+   - Looks up a live order by `order_id` (e.g., `ORD-1001`) in `data/mock_db/orders.json`, computes `days_since_purchase_or_delivery` using `REFERENCE_DATE = "2026-10-18"`, and returns full order details (or a structured `ORDER_NOT_FOUND` status).
+3. `check_product_and_competitor_price(product_id: str, store_id: str = "STORE-NYC-01") -> dict`:
+   - Looks up product details, local store stock, and current competitor listings from `data/mock_db/inventory.json` to support returns, replacements, and `POL-PRC-005` price matches.
+4. `create_ops_escalation_ticket(order_id: str, issue_category: str, policy_id: str, store_id: str, summary: str) -> dict`:
+   - Creative "Close the Loop" Gatekeeper Tool:
+   - Allowed `issue_category` values must strictly match `SOP-OPS-007`:
+     - `DAMAGED_IN_TRANSIT_HIGH_VALUE`
+     - `LOST_PACKAGE`
+     - `SERIAL_NUMBER_MISMATCH`
+     - `BOPIS_INVENTORY_SYNC_ERROR`
+   - Enforces deterministic business guardrails before creating a ticket:
+     - Verifies `order_id` exists in `orders.json`.
+     - If `issue_category == "DAMAGED_IN_TRANSIT_HIGH_VALUE"` and the order's item price is `<= 150.00` (e.g., `ORD-1004`), the tool REJECTS ticket creation (`status: "REJECTED_SELF_SERVICE"`) and instructs the associate to process the replacement/refund directly at the store POS per `POL-ORD-003` and `SOP-OPS-007`.
+     - If valid, generates a deterministic ticket ID (e.g., `TKT-OPS-9001`), persists it, and returns the structured ticket confirmation.
+
+### 7.3. `novamart_agent/agent.py`
+Configure `root_agent` using `google.adk.agents.Agent`:
+- Read `MODEL_NAME = os.environ["GEMINI_MODEL"]`.
+- Register all 4 tools from `novamart_agent/tools.py`.
+- Craft a rigorous System Instruction that requires the agent to:
+  1. Always search official policies (`search_policy_docs`) before answering policy/product questions, and cite the exact `Policy ID` (e.g., `POL-RET-001`, Section 2.1).
+  2. Always call `get_order_status` when an `order_id` is mentioned.
+  3. Act as the **Smart Operations Gatekeeper**: guide the store employee step-by-step on POS self-service when policy allows, or proactively call `create_ops_escalation_ticket` when an escalation trigger in `SOP-OPS-007` is met.
+  4. **Strict Abstention Guardrail**: If a question is outside the scope of NovaMart store operations, product policies, and orders (such as HR, payroll, PTO/vacation, employee discounts, or POS/IT hardware troubleshooting), explicitly decline to answer, state that the information is not part of the store operations knowledge base, and never fabricate policies.
+
+## 8. Evaluation & Deliverables Specification (`evals/`, `PRODUCTION_NOTE.md`, `README.md`)
+
+### 8.1. Automated Evaluation (`evals/test_cases.json` & `evals/run_eval.py`)
+Create an evaluation suite with at least 8 representative test scenarios covering:
+1. Pure policy grounding with numeric calculation (e.g., restocking fee on opened electronics).
+2. No-receipt return rules and store credit cap (`$50.00`).
+3. Live order lookup + self-service resolution (`ORD-1004`, damaged item `<= $150`).
+4. Live order lookup + mandatory Operations escalation ticket creation (`ORD-1005`, damaged TV `> $150`, and `ORD-1006`, lost package `> 24h`).
+5. Out-of-window electronics return denial (`ORD-1003`, 23 days old) + Final Sale denial (`ORD-1008`).
+6. Price match verification against third-party marketplace vs authorized retailer (`PROD-101`).
+7. Out-of-scope abstention tests (e.g., employee asking about sick leave/PTO balance or fixing a jammed receipt printer).
+
+In `evals/run_eval.py`, execute each test case against `root_agent` (using ADK's `InMemoryRunner`), capture:
+- Which tools were called (`tool_trajectory`).
+- Whether expected Policy IDs/keywords were cited.
+- Whether the agent properly abstained on out-of-scope prompts.
+- Print a clean summary table (Pass/Fail per test case and overall score) and save results to `evals/latest_results.json`.
+
+### 8.2. Production Note (`PRODUCTION_NOTE.md` — Max 1 Page)
+Concise, architectural 1-page document covering:
+1. **Gemini Enterprise vs. Custom Build (Hybrid Architecture)**: Use **Gemini Enterprise** out-of-the-box for store employee identity, chat UI, and managed RAG connectors over unstructured policy repositories (Google Drive, SharePoint, Confluence), combined with a **Custom ADK Agent deployed on Vertex AI Agent Engine** registered into Gemini Enterprise for transactional order lookups, ERP/OMS tool execution, and deterministic escalation guardrails.
+2. **Connecting Real Client Data**: Managed connectors via Vertex AI Search (chunking, layout parser, ACL inheritance) for documents + Apigee / Private Service Connect APIs to NovaMart's Order Management System (OMS), POS, and ServiceNow/Jira for Operations ticketing.
+3. **Security & Governance**: Workforce Identity Federation, document-level ACLs, Cloud DLP for PII redaction (customer phone/address/payment data), Vertex AI Model Armor (prompt injection & jailbreak defense), and strict IAM service-account scoping.
+4. **Evaluation & Quality Monitoring Over Time**: CI/CD golden-dataset regression gates via Vertex AI Gen AI Evaluation Service, OpenTelemetry trace logging to BigQuery, online sampling for groundedness/hallucination rate, and business KPI tracking (Operations ticket deflection rate and false-escalation rate).
+
+### 8.3. Repository Documentation (`README.md`)
+Clear documentation covering:
+- Architecture overview and the "Smart Operations Gatekeeper" creative business solution.
+- Quickstart setup (`venv`, `.env`, running via `adk run novamart_agent`, `adk web`, and `python -m evals.run_eval`).
+- Key engineering decisions and explicit assumptions.
+- What we would build next with more time.

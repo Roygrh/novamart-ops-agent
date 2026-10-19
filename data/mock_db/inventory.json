@@ -1,0 +1,109 @@
+{
+  "reference_date": "2026-10-18",
+  "authorized_competitors": ["Amazon.com", "Best Buy", "Target", "Walmart"],
+  "products": {
+    "PROD-101": {
+      "name": "BrewMaster Pro Espresso Machine",
+      "category": "Home & Kitchen",
+      "price": 120.00,
+      "return_window_days": 30,
+      "return_policy_id": "POL-RET-001",
+      "clearance": false,
+      "final_sale": false,
+      "restricted": false,
+      "handling_notes": "Confirm water tank, portafilter, and steam wand are included before accepting a return (PRD-CAT-006)."
+    },
+    "PROD-202": {
+      "name": "NovaAir FPV Drone 4K",
+      "category": "Electronics",
+      "price": 450.00,
+      "return_window_days": 15,
+      "return_policy_id": "POL-ELC-002",
+      "clearance": false,
+      "final_sale": false,
+      "restricted": false,
+      "handling_notes": "Contains a LiPo battery. Damaged units must use a ground hazmat return label, never standard air freight; store in the battery-safe bin (PRD-CAT-006)."
+    },
+    "PROD-303": {
+      "name": "VisionMax 65\" 4K OLED Smart TV",
+      "category": "Electronics",
+      "price": 1200.00,
+      "return_window_days": 15,
+      "return_policy_id": "POL-ELC-002",
+      "clearance": false,
+      "final_sale": false,
+      "restricted": false,
+      "handling_notes": "Verify chassis, box, and receipt serial numbers match before accepting any return; mismatch requires an Operations Escalation Ticket (PRD-CAT-006)."
+    },
+    "PROD-404": {
+      "name": "Heritage Pre-Seasoned Cast Iron Cocotte",
+      "category": "Home & Kitchen",
+      "price": 85.00,
+      "return_window_days": 30,
+      "return_policy_id": "POL-RET-001",
+      "clearance": false,
+      "final_sale": false,
+      "restricted": false,
+      "handling_notes": "Lifetime Cast Iron Replacement Warranty for structural cracks under normal cooking use, handled in-store (PRD-CAT-006)."
+    },
+    "PROD-505": {
+      "name": "SonicPulse Pro In-Ear Wireless Earbuds",
+      "category": "Audio / Personal Care",
+      "price": 160.00,
+      "return_window_days": 30,
+      "return_policy_id": "POL-RES-004",
+      "clearance": false,
+      "final_sale": false,
+      "restricted": true,
+      "handling_notes": "Hygiene item: non-returnable once opened unless defective on arrival (POL-RES-004)."
+    },
+    "PROD-606": {
+      "name": "Nordic Winter Parka (Clearance - 60% Off)",
+      "category": "Apparel (Final Sale)",
+      "price": 64.00,
+      "original_price": 160.00,
+      "discount_percent": 60,
+      "return_window_days": 0,
+      "return_policy_id": "POL-RES-004",
+      "clearance": true,
+      "final_sale": true,
+      "restricted": true,
+      "handling_notes": "Final Sale: non-returnable unless damaged in transit; excluded from competitor price matching (POL-RES-004, POL-PRC-005)."
+    }
+  },
+  "store_inventory": {
+    "STORE-NYC-01": {
+      "PROD-101": {"on_hand": 14, "reserved_for_bopis": 0},
+      "PROD-202": {"on_hand": 6, "reserved_for_bopis": 0},
+      "PROD-303": {"on_hand": 3, "reserved_for_bopis": 0},
+      "PROD-404": {"on_hand": 9, "reserved_for_bopis": 1},
+      "PROD-505": {"on_hand": 22, "reserved_for_bopis": 0},
+      "PROD-606": {"on_hand": 4, "reserved_for_bopis": 0}
+    }
+  },
+  "competitor_listings": {
+    "PROD-101": [
+      {"retailer": "Best Buy", "seller": "Best Buy", "seller_type": "first_party", "price": 105.00, "in_stock": true, "promotion_type": null},
+      {"retailer": "Amazon.com", "seller": "KitchenDealz Marketplace (third-party seller)", "seller_type": "third_party_marketplace", "price": 95.00, "in_stock": true, "promotion_type": null}
+    ],
+    "PROD-202": [
+      {"retailer": "Amazon.com", "seller": "Amazon.com", "seller_type": "first_party", "price": 439.99, "in_stock": true, "promotion_type": null},
+      {"retailer": "Walmart", "seller": "Walmart", "seller_type": "first_party", "price": 429.00, "in_stock": false, "promotion_type": null}
+    ],
+    "PROD-303": [
+      {"retailer": "Target", "seller": "Target", "seller_type": "first_party", "price": 999.99, "in_stock": true, "promotion_type": "black_friday"},
+      {"retailer": "Costco", "seller": "Costco", "seller_type": "first_party", "price": 1149.00, "in_stock": true, "promotion_type": null}
+    ],
+    "PROD-404": [
+      {"retailer": "Target", "seller": "Target", "seller_type": "first_party", "price": 79.99, "in_stock": true, "promotion_type": null},
+      {"retailer": "Walmart", "seller": "Walmart", "seller_type": "first_party", "price": 74.00, "in_stock": true, "promotion_type": "flash_sale"}
+    ],
+    "PROD-505": [
+      {"retailer": "Walmart", "seller": "Walmart", "seller_type": "first_party", "price": 149.00, "in_stock": true, "promotion_type": "bundle"},
+      {"retailer": "Best Buy", "seller": "Best Buy", "seller_type": "first_party", "price": 160.00, "in_stock": true, "promotion_type": null}
+    ],
+    "PROD-606": [
+      {"retailer": "Target", "seller": "Target", "seller_type": "first_party", "price": 59.00, "in_stock": true, "promotion_type": null}
+    ]
+  }
+}
