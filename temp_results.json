@@ -1,0 +1,97 @@
+{
+  "run_at": "2026-10-20T02:48:41+00:00",
+  "reference_date": "2026-10-18",
+  "mode": "agent",
+  "model": "gemini-3.1-flash-lite",
+  "summary": {
+    "component_passed": 0,
+    "component_total": 0,
+    "agent_passed": 1,
+    "agent_executed": 1,
+    "agent_skipped": 0,
+    "tool_trajectory_accuracy": 1.0,
+    "abstention_accuracy": null
+  },
+  "component_checks": [],
+  "agent_cases": [
+    {
+      "id": "TC04",
+      "scenario": "Live order lookup + mandatory escalation (damaged TV > $150)",
+      "prompt": "Customer brought in order ORD-1005, the TV panel is shattered from shipping. Please handle it.",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1005"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "damaged in transit policy SOP-OPS-007 POL-ORD-003"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "create_ops_escalation_ticket",
+          "args": {
+            "store_id": "STORE-NYC-01",
+            "issue_category": "DAMAGED_IN_TRANSIT_HIGH_VALUE",
+            "policy_id": "POL-ORD-003",
+            "summary": "Product PROD-303 (Value $1,200.00) damaged in transit (shattered panel). Evidence: customer report. Photos requested from store associate.",
+            "order_id": "ORD-1005"
+          },
+          "result_status": "CREATED"
+        }
+      ],
+      "tickets_created": [
+        {
+          "ticket_id": "TKT-OPS-9001",
+          "order_id": "ORD-1005",
+          "issue_category": "DAMAGED_IN_TRANSIT_HIGH_VALUE",
+          "policy_id": "POL-ORD-003",
+          "store_id": "STORE-NYC-01",
+          "summary": "Product PROD-303 (Value $1,200.00) damaged in transit (shattered panel). Evidence: customer report. Photos requested from store associate.",
+          "product_id": "PROD-303",
+          "item_value": 1200.0,
+          "customer_name": "Sophia Martinez",
+          "created_on": "2026-10-18",
+          "status": "OPEN",
+          "assigned_to": "NovaMart Central Operations"
+        }
+      ],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ORD-003', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "ticket_created": {
+          "passed": true,
+          "detail": "tickets=[('TKT-OPS-9001', 'DAMAGED_IN_TRANSIT_HIGH_VALUE', 'POL-ORD-003')]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "924 chars"
+        }
+      },
+      "response": "Escalated to Operations: ticket TKT-OPS-9001.\n\n**Key Facts:**\n*   **Order ID:** ORD-1005 (Sophia Martinez)\n*   **Product:** PROD-303 (VisionMax 65\" 4K OLED Smart TV)\n*   **Item Value:** $1,200.00\n*   **Reason:** Item damaged in transit (shattered panel). \n*   **Policy:** Per POL-ORD-003, Section 3.3, items valued over $150.00 cannot be processed at the register and must be escalated.\n\n**Next Steps:**\n1.  Provide the customer with ticket reference **TKT-OPS-9001** and explain that NovaMart Central Operations will reach out to them directly.\n2.  Do **not** promise a refund, replacement, or specific resolution timeline at the register (SOP-OPS-007, Section 6.2).\n3.  Retain the damaged unit at the store until Central Operations confirms the final disposition (SOP-OPS-007, Section 6.3). \n4.  Ensure you have taken photos of the damaged unit and the packaging for your records, as these are required for the escalation.",
+      "latency_s": 26.08,
+      "llm_calls": 4,
+      "attempts": 1
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "reference_date": "2026-10-18",
+  "notes": [
+    "keyword groups: each inner list is a set of alternatives (any one must appear, case-insensitive); every group must match.",
+    "expected_ticket: the escalation ticket that must exist in data/mock_db/escalation_tickets.json after the run (null = no ticket may be created).",
+    "The ticket store is reset before every case, so the first ticket of each case is deterministically TKT-OPS-9001."
+  ],
+  "retrieval_checks": [
+    {"id": "R01", "query": "POL-ELC-002 restocking fee opened electronics", "expected_top": "POL-ELC-002", "expected_top_section": "3"},
+    {"id": "R02", "query": "return without receipt store credit", "expected_top": "POL-RET-001"},
+    {"id": "R03", "query": "BOPIS hold extension 48-hour", "expected_top": "POL-ORD-003"},
+    {"id": "R04", "query": "PROD-303 serial number verification", "expected_top": "PRD-CAT-006"},
+    {"id": "R05", "query": "lost package delivered not received", "expected_top": "POL-ORD-003"},
+    {"id": "R06", "query": "competitor price match Amazon marketplace third-party", "expected_top": "POL-PRC-005"},
+    {"id": "R07", "query": "escalation ticket required fields", "expected_top": "SOP-OPS-007"},
+    {"id": "R08", "query": "Final Sale clearance non-returnable", "expected_in_top_k": "POL-RES-004"},
+    {"id": "R09", "query": "sick leave PTO balance", "expect_empty": true},
+    {"id": "R10", "query": "wifi router reset", "expect_empty": true},
+    {"id": "R11", "query": "employee discount rate", "expect_empty": true},
+    {"id": "R12", "query": "B2B wholesale contract", "expect_empty": true}
+  ],
+  "agent_cases": [
+    {
+      "id": "TC01",
+      "scenario": "Policy grounding + numeric calculation (open-box restocking fee)",
+      "prompt": "A customer wants to return a NovaAir FPV Drone 4K they bought 8 days ago for $450.00. The seal is broken but the drone works fine. How much do we refund?",
+      "expected_tools": ["search_policy_docs"],
+      "forbidden_tools": ["create_ops_escalation_ticket"],
+      "expected_policy_ids": ["POL-ELC-002"],
+      "expected_keywords": [["67.50"], ["382.50"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC02",
+      "scenario": "No-receipt return rules and $50.00 store credit cap",
+      "prompt": "A customer is returning a Heritage Pre-Seasoned Cast Iron Cocotte but has no receipt and no order number. What can I offer them?",
+      "expected_tools": ["search_policy_docs"],
+      "forbidden_tools": ["create_ops_escalation_ticket"],
+      "expected_policy_ids": ["POL-RET-001"],
+      "expected_keywords": [["store credit"], ["$50", "50.00"], ["photo id", "government-issued", "government issued"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC03",
+      "scenario": "Live order lookup + self-service resolution (damaged item <= $150)",
+      "prompt": "Order ORD-1004 arrived with a cracked water tank. The customer is at my register. What should I do?",
+      "expected_tools": ["get_order_status"],
+      "forbidden_tools": [],
+      "expected_policy_ids": ["POL-ORD-003"],
+      "expected_keywords": [["replacement", "refund"], ["120"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC04",
+      "scenario": "Live order lookup + mandatory escalation (damaged TV > $150)",
+      "prompt": "Customer brought in order ORD-1005, the TV panel is shattered from shipping. Please handle it.",
+      "expected_tools": ["get_order_status", "create_ops_escalation_ticket"],
+      "forbidden_tools": [],
+      "expected_policy_ids": ["POL-ORD-003"],
+      "expected_keywords": [["TKT-OPS-9001"]],
+      "expected_ticket": {"order_id": "ORD-1005", "issue_category": "DAMAGED_IN_TRANSIT_HIGH_VALUE", "policy_id": "POL-ORD-003"}
+    },
+    {
+      "id": "TC05",
+      "scenario": "Live order lookup + mandatory escalation (lost package > 24h after Delivered scan)",
+      "prompt": "The customer on order ORD-1006 says the earbuds never arrived even though tracking says delivered. What do we do?",
+      "expected_tools": ["get_order_status", "create_ops_escalation_ticket"],
+      "forbidden_tools": [],
+      "expected_policy_ids": ["POL-ORD-003"],
+      "expected_keywords": [["TKT-OPS-9001"]],
+      "expected_ticket": {"order_id": "ORD-1006", "issue_category": "LOST_PACKAGE", "policy_id": "POL-ORD-003"}
+    },
+    {
+      "id": "TC06",
+      "scenario": "Out-of-window electronics return denial (23 days old)",
+      "prompt": "Can I accept a return for order ORD-1003? The drone motor is defective.",
+      "expected_tools": ["get_order_status"],
+      "forbidden_tools": ["create_ops_escalation_ticket"],
+      "expected_policy_ids": ["POL-ELC-002"],
+      "expected_keywords": [["warranty"], ["15"], ["23"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC07",
+      "scenario": "Final Sale denial (clearance parka, wrong size, not damaged)",
+      "prompt": "Customer wants to return the parka from order ORD-1008 because it's the wrong size. It's unopened. Can I refund it?",
+      "expected_tools": ["get_order_status"],
+      "forbidden_tools": ["create_ops_escalation_ticket"],
+      "expected_policy_ids": ["POL-RES-004"],
+      "expected_keywords": [["final sale"], ["not", "cannot", "non-returnable", "decline"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC08",
+      "scenario": "Price match: authorized retailer vs third-party marketplace (PROD-101)",
+      "prompt": "A customer wants us to price match the BrewMaster Pro Espresso Machine (PROD-101). They showed me $95 on Amazon and $105 at Best Buy. Which one can I honor?",
+      "expected_tools": ["check_product_and_competitor_price"],
+      "forbidden_tools": ["create_ops_escalation_ticket"],
+      "expected_policy_ids": ["POL-PRC-005"],
+      "expected_keywords": [["105"], ["best buy"], ["third-party", "third party", "marketplace"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC09",
+      "scenario": "BOPIS one-time 48-hour hold extension (self-service)",
+      "prompt": "The customer for BOPIS order ORD-1007 called and can't pick up until next week. Can we hold it longer?",
+      "expected_tools": ["get_order_status"],
+      "forbidden_tools": ["create_ops_escalation_ticket"],
+      "expected_policy_ids": ["POL-ORD-003"],
+      "expected_keywords": [["48-hour", "48 hour", "48 hours"]],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC10",
+      "scenario": "Out-of-scope abstention (HR: sick leave / PTO balance)",
+      "prompt": "How many sick days and PTO hours do I have left this year?",
+      "expect_abstention": true,
+      "expected_tools": [],
+      "forbidden_tools": ["get_order_status", "check_product_and_competitor_price", "create_ops_escalation_ticket"],
+      "expected_policy_ids": [],
+      "expected_keywords": [],
+      "expected_ticket": null
+    },
+    {
+      "id": "TC11",
+      "scenario": "Out-of-scope abstention (IT: jammed receipt printer)",
+      "prompt": "The receipt printer at register 3 keeps jamming. How do I fix it?",
+      "expect_abstention": true,
+      "expected_tools": [],
+      "forbidden_tools": ["get_order_status", "check_product_and_competitor_price", "create_ops_escalation_ticket"],
+      "expected_policy_ids": [],
+      "expected_keywords": [],
+      "expected_ticket": null
+    }
+  ]
+}

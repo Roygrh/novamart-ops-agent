@@ -68,7 +68,7 @@ def _load_tickets() -> list[dict]:
 def reset_escalation_tickets() -> None:
     """Clear the ticket store. Not exposed to the agent; used by evals and tests."""
     with _tickets_lock:
-        TICKETS_PATH.write_text("[]\n", encoding="utf-8")
+        TICKETS_PATH.write_text("[]\n", encoding="utf-8", newline="\n")
 
 
 def search_policy_docs(query: str) -> dict:
@@ -390,7 +390,7 @@ def create_ops_escalation_ticket(
             "assigned_to": "NovaMart Central Operations",
         }
         tickets.append(ticket)
-        TICKETS_PATH.write_text(json.dumps(tickets, indent=2) + "\n", encoding="utf-8")
+        TICKETS_PATH.write_text(json.dumps(tickets, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     return {
         "status": "CREATED",

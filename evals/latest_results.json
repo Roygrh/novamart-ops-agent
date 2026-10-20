@@ -1,0 +1,1004 @@
+{
+  "run_at": "2026-10-19T05:42:40+00:00",
+  "reference_date": "2026-10-18",
+  "mode": "all",
+  "model": {
+    "gemini-3.7-flash": "TC01-TC05",
+    "gemini-3.6-flash": "TC06-TC10",
+    "gemini-3.1-flash-lite": "TC11"
+  },
+  "note": "Merged from separate runs: live cases were executed on different Gemini models (see per-case 'model'); component checks from the latest component-mode run.",
+  "summary": {
+    "component_passed": 40,
+    "component_total": 40,
+    "agent_passed": 11,
+    "agent_executed": 11,
+    "agent_skipped": 0,
+    "tool_trajectory_accuracy": 1.0,
+    "abstention_accuracy": 1.0
+  },
+  "component_checks": [
+    {
+      "group": "retrieval",
+      "id": "R01",
+      "description": "'POL-ELC-002 restocking fee opened electronics' ranks POL-ELC-002#3 first",
+      "passed": true,
+      "detail": "got ['POL-ELC-002#3', 'POL-ELC-002#0', 'POL-ELC-002#4', 'POL-ELC-002#1']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R02",
+      "description": "'return without receipt store credit' ranks POL-RET-001 first",
+      "passed": true,
+      "detail": "got ['POL-RET-001#5', 'POL-RET-001#6', 'POL-RET-001#0', 'POL-RET-001#4']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R03",
+      "description": "'BOPIS hold extension 48-hour' ranks POL-ORD-003 first",
+      "passed": true,
+      "detail": "got ['POL-ORD-003#2', 'SOP-OPS-007#2', 'POL-ORD-003#0', 'POL-ORD-003#1']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R04",
+      "description": "'PROD-303 serial number verification' ranks PRD-CAT-006 first",
+      "passed": true,
+      "detail": "got ['PRD-CAT-006#4', 'SOP-OPS-007#3', 'POL-ELC-002#4', 'POL-ELC-002#6']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R05",
+      "description": "'lost package delivered not received' ranks POL-ORD-003 first",
+      "passed": true,
+      "detail": "got ['POL-ORD-003#4', 'SOP-OPS-007#5', 'POL-ORD-003#0', 'SOP-OPS-007#3']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R06",
+      "description": "'competitor price match Amazon marketplace third-party' ranks POL-PRC-005 first",
+      "passed": true,
+      "detail": "got ['POL-PRC-005#2', 'POL-PRC-005#4', 'POL-PRC-005#6', 'POL-PRC-005#3']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R07",
+      "description": "'escalation ticket required fields' ranks SOP-OPS-007 first",
+      "passed": true,
+      "detail": "got ['SOP-OPS-007#4', 'SOP-OPS-007#0', 'POL-ORD-003#3', 'SOP-OPS-007#3']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R08",
+      "description": "'Final Sale clearance non-returnable' returns POL-RES-004 in top 4",
+      "passed": true,
+      "detail": "got ['PRD-CAT-006#7', 'POL-RES-004#2', 'POL-RES-004#0', 'POL-PRC-005#4']"
+    },
+    {
+      "group": "retrieval",
+      "id": "R09",
+      "description": "out-of-scope query returns nothing: 'sick leave PTO balance'",
+      "passed": true,
+      "detail": "got []"
+    },
+    {
+      "group": "retrieval",
+      "id": "R10",
+      "description": "out-of-scope query returns nothing: 'wifi router reset'",
+      "passed": true,
+      "detail": "got []"
+    },
+    {
+      "group": "retrieval",
+      "id": "R11",
+      "description": "out-of-scope query returns nothing: 'employee discount rate'",
+      "passed": true,
+      "detail": "got []"
+    },
+    {
+      "group": "retrieval",
+      "id": "R12",
+      "description": "out-of-scope query returns nothing: 'B2B wholesale contract'",
+      "passed": true,
+      "detail": "got []"
+    },
+    {
+      "group": "retrieval",
+      "id": "R13",
+      "description": "search_policy_docs reports NO_RESULTS for out-of-scope query",
+      "passed": true,
+      "detail": "status=NO_RESULTS"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1001",
+      "description": "ORD-1001 is 10 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 10"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1002",
+      "description": "ORD-1002 is 8 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 8"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1003",
+      "description": "ORD-1003 is 23 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 23"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1004",
+      "description": "ORD-1004 is 2 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 2"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1005",
+      "description": "ORD-1005 is 3 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 3"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1006",
+      "description": "ORD-1006 is 3 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 3"
+    },
+    {
+      "group": "orders",
+      "id": "O-ORD-1008",
+      "description": "ORD-1008 is 4 days since purchase/delivery",
+      "passed": true,
+      "detail": "got 4"
+    },
+    {
+      "group": "orders",
+      "id": "O-BOPIS",
+      "description": "ORD-1007 is on hold day 4, active, 2 days remaining incl. today",
+      "passed": true,
+      "detail": "day=4 active=True remaining=2"
+    },
+    {
+      "group": "orders",
+      "id": "O-LOST",
+      "description": "ORD-1006 Delivered scan is > 24h old (72h)",
+      "passed": true,
+      "detail": "got 72"
+    },
+    {
+      "group": "orders",
+      "id": "O-404",
+      "description": "unknown order returns ORDER_NOT_FOUND",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "group": "orders",
+      "id": "O-NORM",
+      "description": "order IDs are normalized (whitespace / lowercase)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "group": "pricing",
+      "id": "P-RESTOCK",
+      "description": "PROD-202 open-box refund: 15% fee $67.50, net $382.50",
+      "passed": true,
+      "detail": "fee=67.5 net=382.5"
+    },
+    {
+      "group": "pricing",
+      "id": "P-101-BB",
+      "description": "PROD-101 Best Buy $105.00 is the eligible price match",
+      "passed": true,
+      "detail": "best=('Best Buy', 105.0)"
+    },
+    {
+      "group": "pricing",
+      "id": "P-101-MKT",
+      "description": "PROD-101 Amazon third-party marketplace $95.00 is ineligible",
+      "passed": true,
+      "detail": "Third-party marketplace sellers are excluded; Amazon listings must be Sold and Shipped by Amazon.com (POL-PRC-005, Sections 2.1 and 4.1)."
+    },
+    {
+      "group": "pricing",
+      "id": "P-303",
+      "description": "PROD-303: Black Friday promo and unauthorized retailer both ineligible",
+      "passed": true,
+      "detail": "Black Friday promotions are excluded (POL-PRC-005, Section 4.3).; Costco is not an authorized competitor (POL-PRC-005, Section 2)."
+    },
+    {
+      "group": "pricing",
+      "id": "P-202-OOS",
+      "description": "PROD-202: out-of-stock Walmart listing ineligible, Amazon.com first-party eligible",
+      "passed": true,
+      "detail": "best=Amazon.com"
+    },
+    {
+      "group": "pricing",
+      "id": "P-606",
+      "description": "PROD-606 clearance / Final Sale is excluded from price match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "group": "pricing",
+      "id": "P-404",
+      "description": "unknown product returns PRODUCT_NOT_FOUND",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-SELF",
+      "description": "ORD-1004 ($120 <= $150) damage ticket is REJECTED_SELF_SERVICE",
+      "passed": true,
+      "detail": "REJECTED_SELF_SERVICE"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-HIGH",
+      "description": "ORD-1005 ($1,200) damage ticket is CREATED as TKT-OPS-9001",
+      "passed": true,
+      "detail": "CREATED TKT-OPS-9001"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-DUP",
+      "description": "duplicate ticket returns ALREADY_ESCALATED with the same ID",
+      "passed": true,
+      "detail": "ALREADY_ESCALATED"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-LOST",
+      "description": "ORD-1006 lost package (72h) is CREATED as TKT-OPS-9002",
+      "passed": true,
+      "detail": "CREATED TKT-OPS-9002"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-CAT",
+      "description": "non-SOP-OPS-007 category is REJECTED_INVALID_INPUT",
+      "passed": true,
+      "detail": "REJECTED_INVALID_INPUT"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-POL",
+      "description": "mismatched policy_id is REJECTED_INVALID_INPUT",
+      "passed": true,
+      "detail": "REJECTED_INVALID_INPUT"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-EMPTY",
+      "description": "missing summary is REJECTED_INVALID_INPUT",
+      "passed": true,
+      "detail": "REJECTED_INVALID_INPUT"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-404",
+      "description": "ticket for unknown order returns ORDER_NOT_FOUND",
+      "passed": true,
+      "detail": "ORDER_NOT_FOUND"
+    },
+    {
+      "group": "gatekeeper",
+      "id": "G-STORE",
+      "description": "exactly 2 tickets persisted (rejections never write)",
+      "passed": true,
+      "detail": "got ['TKT-OPS-9001', 'TKT-OPS-9002']"
+    }
+  ],
+  "agent_cases": [
+    {
+      "id": "TC01",
+      "scenario": "Policy grounding + numeric calculation (open-box restocking fee)",
+      "prompt": "A customer wants to return a NovaAir FPV Drone 4K they bought 8 days ago for $450.00. The seal is broken but the drone works fine. How much do we refund?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "NovaAir FPV Drone restocking fee electronics return"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "POL-ELC-002 Section 2 return window"
+          },
+          "result_status": "SUCCESS"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ELC-002', 'PRD-CAT-006'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "972 chars"
+        }
+      },
+      "response": "**Self-service: approve return in-store with restocking fee applied.**\n\n### Key Details & Policy Rules\n* **Item:** PROD-202 (NovaAir FPV Drone 4K)\n* **Return Window:** 8 days elapsed is within the 15-calendar-day Electronics return window (POL-ELC-002, Section 2.1).\n* **Condition & Fee:** Because the seal is broken and the item is non-defective, a 15% open-box restocking fee applies (POL-ELC-002, Section 3.2; PRD-CAT-006, Section 3.1).\n\n### Calculation\n* **Purchase price:** $450.00  \n* **Restocking fee (15%):** 15% of $450.00 = $67.50  \n* **Net refund amount:** $450.00 - $67.50 = **$382.50** (POL-ELC-002, Section 3.3)\n\n### POS Steps for Associate\n1. Scan the receipt or look up the transaction at the register.\n2. Select the NovaAir FPV Drone 4K (PROD-202) for return.\n3. Select the return reason code for **Opened / Non-Defective** so the POS applies the 15% restocking fee.\n4. Process the net refund of **$382.50** back to the customer's original payment method.",
+      "latency_s": 26.89,
+      "llm_calls": 3,
+      "attempts": 1,
+      "model": "gemini-3.7-flash",
+      "run_at": "2026-10-19T05:36:39+00:00"
+    },
+    {
+      "id": "TC02",
+      "scenario": "No-receipt return rules and $50.00 store credit cap",
+      "prompt": "A customer is returning a Heritage Pre-Seasoned Cast Iron Cocotte but has no receipt and no order number. What can I offer them?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "Heritage Pre-Seasoned Cast Iron Cocotte return without receipt"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "POL-RET-001 Section 3 condition"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "SOP-OPS-007 PROD-404 cast iron"
+          },
+          "result_status": "SUCCESS"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-RET-001', 'PRD-CAT-006', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "2543 chars"
+        }
+      },
+      "response": "**Verdict:** Self-service: resolve in-store at the POS (do not escalate).\n\n---\n\n### Key Information\n* **Product:** Heritage Pre-Seasoned Cast Iron Cocotte (`PROD-404`)\n* **Retail Value:** $85.00 (PRD-CAT-006, Section 1)\n* **Receipt/Order ID:** None provided\n\nDepending on why the customer is returning the item, you have two options:\n\n---\n\n### Option 1: Standard No-Receipt Return (Store Credit)\nIf the customer wants a refund/credit for an unwanted item:\n\n1. **Store Credit Only:** Without a receipt or order ID, the customer is eligible only for store credit, not cash or card refunds (POL-RET-001, Section 5.1).\n2. **Capped at $50.00:** No-receipt store credit is capped at a maximum of **$50.00**, even though the cocotte retails for $85.00 (POL-RET-001, Section 5.2).\n3. **Government ID Required:** The customer must present a valid government-issued photo ID, which must be recorded in the POS (POL-RET-001, Section 5.3).\n4. **Frequency Limit:** Customers are limited to 2 no-receipt returns per rolling 12-month period. If the POS indicates this is a 3rd attempt, it will block the return and you must decline it (POL-RET-001, Section 5.4).\n5. **Condition Inspection:** The item must be in new or gently used condition with original packaging and all included accessories (POL-RET-001, Section 3.1–3.3, Section 5.5).\n\n**POS Steps:**\n1. Inspect the item to confirm it is in new or gently used condition with packaging and parts.\n2. Select \"No-Receipt Return\" on the POS returns screen.\n3. Scan/enter the customer's government-issued photo ID.\n4. Issue the **$50.00** store credit voucher/gift card.\n\n---\n\n### Option 2: Lifetime Cast Iron Warranty Replacement (Defect / Crack)\nIf the customer is returning the cocotte because it failed:\n\n1. **Warranty Coverage:** PROD-404 includes a **Lifetime Cast Iron Replacement Warranty** covering **structural cracks** occurring under normal cooking use at any time after purchase (PRD-CAT-006, Section 5.2).\n2. **Direct In-Store Resolution:** Warranty replacements are handled directly at the store without requiring Operations escalation (PRD-CAT-006, Section 5.3; SOP-OPS-007, Section 2.6).\n3. **Exclusions:** Surface rust, seasoning wear, and damage resulting from dropping or misuse are not structural cracks under normal cooking use and are not eligible for replacement (PRD-CAT-006, Section 5.4).\n\n**POS Steps:**\n1. Inspect the cocotte to verify a structural crack from normal cooking use.\n2. At the POS, select **\"Warranty Replacement\"** to issue an identical replacement unit at no charge.",
+      "latency_s": 36.08,
+      "llm_calls": 4,
+      "attempts": 1,
+      "model": "gemini-3.7-flash",
+      "run_at": "2026-10-19T05:36:39+00:00"
+    },
+    {
+      "id": "TC03",
+      "scenario": "Live order lookup + self-service resolution (damaged item <= $150)",
+      "prompt": "Order ORD-1004 arrived with a cracked water tank. The customer is at my register. What should I do?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1004"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "damaged in transit POL-ORD-003 SOP-OPS-007"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "check_product_and_competitor_price",
+          "args": {
+            "product_id": "PROD-101",
+            "store_id": "STORE-NYC-01"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "PROD-101 BrewMaster Pro Espresso Machine PRD-CAT-006"
+          },
+          "result_status": "SUCCESS"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ORD-003', 'PRD-CAT-006', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1381 chars"
+        }
+      },
+      "response": "**Self-service: resolve in-store at the register (do not escalate to Operations).**\n\n### Key Facts\n* **Order ID:** ORD-1004 (Customer: David Kim)\n* **Item:** BrewMaster Pro Espresso Machine (`PROD-101`), $120.00\n* **Delivery Date:** October 16, 2026 (2 days ago; delivered condition: cracked water tank)\n* **Store Inventory:** 14 units of `PROD-101` available in stock at STORE-NYC-01\n\n### Why This Is Self-Service\nUnder **SOP-OPS-007, Section 2.2** and **POL-ORD-003, Section 3.2**, items damaged in transit valued at **$150.00 or less** are authorized for immediate store resolution at the register without Operations approval.\n\n### Register / POS Action Steps\n1. **Verify Order & Accessories:** Pull up `ORD-1004` on the POS. Confirm the customer has returned the unit along with all standard parts: water tank, portafilter, and steam wand (**PRD-CAT-006, Section 2.2**).\n2. **Document Damage:** Take clear photos of the cracked water tank and shipping packaging for store records (**POL-ORD-003, Section 3.2**).\n3. **Offer Replacement or Refund:**\n   * **Replacement:** Issue an immediate replacement unit from shelf stock (14 units currently available).\n   * **Refund:** Issue a full refund of $120.00 to the original payment method.\n4. **POS Entry:** Select **\"Transit Damage — Replacement\"** or **\"Transit Damage — Refund\"** in the POS system (**POL-ORD-003, Section 3.2**).",
+      "latency_s": 64.06,
+      "llm_calls": 4,
+      "attempts": 1,
+      "model": "gemini-3.7-flash",
+      "run_at": "2026-10-19T05:36:39+00:00"
+    },
+    {
+      "id": "TC04",
+      "scenario": "Live order lookup + mandatory escalation (damaged TV > $150)",
+      "prompt": "Customer brought in order ORD-1005, the TV panel is shattered from shipping. Please handle it.",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1005"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "damaged in transit shipping POL-ORD-003 SOP-OPS-007"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "SOP-OPS-007 Section 6 next steps"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "create_ops_escalation_ticket",
+          "args": {
+            "store_id": "STORE-NYC-01",
+            "summary": "PROD-303 ($1,200.00) arrived with shattered OLED TV panel from transit damage. Photos collected.",
+            "order_id": "ORD-1005",
+            "issue_category": "DAMAGED_IN_TRANSIT_HIGH_VALUE",
+            "policy_id": "POL-ORD-003"
+          },
+          "result_status": "CREATED"
+        }
+      ],
+      "tickets_created": [
+        {
+          "ticket_id": "TKT-OPS-9001",
+          "order_id": "ORD-1005",
+          "issue_category": "DAMAGED_IN_TRANSIT_HIGH_VALUE",
+          "policy_id": "POL-ORD-003",
+          "store_id": "STORE-NYC-01",
+          "summary": "PROD-303 ($1,200.00) arrived with shattered OLED TV panel from transit damage. Photos collected.",
+          "product_id": "PROD-303",
+          "item_value": 1200.0,
+          "customer_name": "Sophia Martinez",
+          "created_on": "2026-10-18",
+          "status": "OPEN",
+          "assigned_to": "NovaMart Central Operations"
+        }
+      ],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ORD-003', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "ticket_created": {
+          "passed": true,
+          "detail": "tickets=[('TKT-OPS-9001', 'DAMAGED_IN_TRANSIT_HIGH_VALUE', 'POL-ORD-003')]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1283 chars"
+        }
+      },
+      "response": "**Escalated to Operations: ticket TKT-OPS-9001**\n\n### Key Facts\n* **Order ID:** ORD-1005\n* **Customer:** Sophia Martinez\n* **Item:** PROD-303 (VisionMax 65\" 4K OLED Smart TV)\n* **Value:** $1,200.00\n* **Reported Condition:** Damaged in Transit (shattered TV panel)\n* **Store ID:** STORE-NYC-01\n\n### Policy & Escalation Reason\nBecause the item was damaged in transit and its value exceeds $150.00 ($1,200.00 > $150.00), store associates cannot resolve this at the POS or register (POL-ORD-003, Section 3.3; SOP-OPS-007, Section 3.1). This case requires an Operations Escalation Ticket.\n\n### Next Steps for Store Associate\n1. **Provide Reference to Customer:** Give Sophia Martinez the escalation ticket reference number **TKT-OPS-9001** and explain that Central Operations will contact her directly regarding the resolution (SOP-OPS-007, Section 6.1).\n2. **Do Not Promise Outcomes:** Do not promise a refund, replacement unit, or specific timeline at the register (SOP-OPS-007, Section 6.2).\n3. **Hold Damaged Unit & Packaging:** Retain the damaged television and its original packaging at the store until Operations provides disposition instructions, and ensure photos of the damage and box are attached/retained for store records (POL-ORD-003, Section 3.3; SOP-OPS-007, Section 6.3).",
+      "latency_s": 76.8,
+      "llm_calls": 4,
+      "attempts": 1,
+      "model": "gemini-3.7-flash",
+      "run_at": "2026-10-19T05:36:39+00:00"
+    },
+    {
+      "id": "TC05",
+      "scenario": "Live order lookup + mandatory escalation (lost package > 24h after Delivered scan)",
+      "prompt": "The customer on order ORD-1006 says the earbuds never arrived even though tracking says delivered. What do we do?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1006"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "lost package tracking delivered carrier scan"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "SOP-OPS-007 Section 6"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "create_ops_escalation_ticket",
+          "args": {
+            "store_id": "STORE-NYC-01",
+            "policy_id": "POL-ORD-003",
+            "issue_category": "LOST_PACKAGE",
+            "summary": "Customer Liam O'Connor reports PROD-505 ($160.00) never received. Carrier Delivered scan was 72 hours ago, exceeding the 24-hour threshold.",
+            "order_id": "ORD-1006"
+          },
+          "result_status": "CREATED"
+        }
+      ],
+      "tickets_created": [
+        {
+          "ticket_id": "TKT-OPS-9001",
+          "order_id": "ORD-1006",
+          "issue_category": "LOST_PACKAGE",
+          "policy_id": "POL-ORD-003",
+          "store_id": "STORE-NYC-01",
+          "summary": "Customer Liam O'Connor reports PROD-505 ($160.00) never received. Carrier Delivered scan was 72 hours ago, exceeding the 24-hour threshold.",
+          "product_id": "PROD-505",
+          "item_value": 160.0,
+          "customer_name": "Liam O'Connor",
+          "created_on": "2026-10-18",
+          "status": "OPEN",
+          "assigned_to": "NovaMart Central Operations"
+        }
+      ],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ORD-003', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "ticket_created": {
+          "passed": true,
+          "detail": "tickets=[('TKT-OPS-9001', 'LOST_PACKAGE', 'POL-ORD-003')]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1126 chars"
+        }
+      },
+      "response": "**Escalated to Operations: ticket TKT-OPS-9001**\n\n### Key Facts\n* **Order ID:** ORD-1006 (Customer: Liam O'Connor)\n* **Item:** SonicPulse Pro In-Ear Wireless Earbuds (`PROD-505`), $160.00\n* **Tracking Status:** Carrier marked as \"Delivered\" 72 hours ago (October 15, 2026).\n* **Policy Trigger:** Because more than 24 hours have passed since the carrier \"Delivered\" scan and the package has not arrived, the issue must be escalated to Central Operations for a carrier claim investigation (POL-ORD-003, Section 4.3; SOP-OPS-007, Section 3.2).\n\n---\n\n### Associate Next Steps\n1. **Do not issue a refund or replacement at the register**; resolution for lost packages is handled by Operations following the carrier claim (POL-ORD-003, Section 4.4).\n2. **Provide the customer with the ticket reference number:** `TKT-OPS-9001` (SOP-OPS-007, Section 6.1).\n3. **Inform the customer** that NovaMart Central Operations will investigate the carrier delivery and follow up with them directly (SOP-OPS-007, Section 6.1).\n4. **Do not promise a refund, replacement, or specific resolution timeline** at the counter (SOP-OPS-007, Section 6.2).",
+      "latency_s": 34.11,
+      "llm_calls": 4,
+      "attempts": 1,
+      "model": "gemini-3.7-flash",
+      "run_at": "2026-10-19T05:36:39+00:00"
+    },
+    {
+      "id": "TC06",
+      "scenario": "Out-of-window electronics return denial (23 days old)",
+      "prompt": "Can I accept a return for order ORD-1003? The drone motor is defective.",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1003"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "electronics return policy defective drone motor restocking fee POL-ELC-002 POL-RET-001"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "POL-ELC-002 return window defective past 15 days warranty manufacturer PRD-CAT-006 PROD-202"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "POL-ELC-002 Section 2 Section 5 after 15 days manufacturer warranty SOP-OPS-007"
+          },
+          "result_status": "SUCCESS"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ELC-002', 'PRD-CAT-006', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1334 chars"
+        }
+      },
+      "response": "**Verdict:** Self-service: decline return in-store (out-of-window denial).\n\n### Key Order Facts\n* **Order ID:** ORD-1003\n* **Customer:** Elena Rostova\n* **Product:** PROD-202 (NovaAir FPV Drone 4K)\n* **Category:** Electronics\n* **Delivery Date:** September 25, 2026\n* **Current Date:** October 18, 2026\n* **Days Since Delivery:** 23 calendar days\n\n### Policy Analysis & Next Steps\n1. **Return Window Exceeded:** Electronics fall under a strict **15-calendar-day return window** (POL-ELC-002, Section 1.2; PRD-CAT-006, Section 1), which overrides the standard 30-day return policy.\n2. **Post-15 Day Policy:** Because 23 days have elapsed since delivery (23 > 15 days), in-store returns for defective electronics past the 15-day window are strictly declined (POL-ELC-002, Section 5.1).\n3. **No Operations Escalation Required:** Out-of-window denials clearly covered by policy must be handled at the POS by store associates and do not require an Operations escalation ticket (SOP-OPS-007, Section 2.5; POL-ELC-002, Section 5.3).\n4. **Associate Action Steps:**\n   1. Inform the customer that the return window for electronics is 15 calendar days and has expired.\n   2. Direct the customer to the manufacturer's **1-year warranty** and provide the manufacturer contact details found in the product documentation (POL-ELC-002, Section 5.2).",
+      "latency_s": 29.23,
+      "llm_calls": 4,
+      "attempts": 1,
+      "model": "gemini-3.6-flash",
+      "run_at": "2026-10-19T05:40:16+00:00"
+    },
+    {
+      "id": "TC07",
+      "scenario": "Final Sale denial (clearance parka, wrong size, not damaged)",
+      "prompt": "Customer wants to return the parka from order ORD-1008 because it's the wrong size. It's unopened. Can I refund it?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1008"
+          },
+          "result_status": "FOUND"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "return policy return window unopened apparel POL-RET-001"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "POL-RES-004 Final Sale clearance return refund"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "SOP-OPS-007 self-service restricted items clear policy denial"
+          },
+          "result_status": "SUCCESS"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-RES-004', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1518 chars"
+        }
+      },
+      "response": "**Verdict:** Self-service: Decline the return request in-store.\n\n### Key Facts\n- **Order ID:** ORD-1008\n- **Product:** Nordic Winter Parka (Clearance - 60% Off) (`PROD-606`)\n- **Price Paid:** $64.00 (60% discount from $160.00 original price)\n- **Reported Reason:** Unopened — Wrong Size\n\n---\n\n### Policy Analysis & Explanation\n1. **Strictly Non-Returnable Item:** Clearance merchandise marked Final Sale or discounted by 50% or more from its original price is strictly non-returnable and non-refundable (POL-RES-004, Section 2.1). `PROD-606` is specifically listed under this rule.\n2. **No Exception Applies:** The single exception for returning Final Sale items is if the item arrived physically damaged in transit from an online order (POL-RES-004, Section 4.1). Returning an item due to wrong size does not qualify for an exception.\n3. **No Operations Escalation:** SOP-OPS-007, Section 2.5 explicitly directs store associates to handle clear restricted-item denials at the store level without escalating to Operations.\n\n---\n\n### Store Associate Action Steps\n1. **Inform the Customer:** Politely explain to the customer that clearance merchandise discounted 50% or more is designated as Final Sale and cannot be returned or refunded (POL-RES-004, Section 2.1).\n2. **Return the Merchandise:** Return the unopened parka to the customer. Do not accept the product back into store inventory.\n3. **Close the Request:** Do not process a refund at the POS and do not create an Operations ticket (SOP-OPS-007, Section 2.5).",
+      "latency_s": 34.27,
+      "llm_calls": 4,
+      "attempts": 2,
+      "model": "gemini-3.6-flash",
+      "run_at": "2026-10-19T05:40:16+00:00"
+    },
+    {
+      "id": "TC08",
+      "scenario": "Price match: authorized retailer vs third-party marketplace (PROD-101)",
+      "prompt": "A customer wants us to price match the BrewMaster Pro Espresso Machine (PROD-101). They showed me $95 on Amazon and $105 at Best Buy. Which one can I honor?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "POL-PRC-005 price match policy Amazon Best Buy"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "check_product_and_competitor_price",
+          "args": {
+            "product_id": "PROD-101",
+            "store_id": "STORE-NYC-01"
+          },
+          "result_status": "FOUND"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-PRC-005'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1311 chars"
+        }
+      },
+      "response": "**Self-service: Honor the Best Buy price match ($105.00); decline the Amazon price match.**\n\n---\n\n### Key Facts\n* **Product:** BrewMaster Pro Espresso Machine (`PROD-101`)\n* **NovaMart Price:** $120.00\n* **Amazon Listing ($95.00):** **Declined.** The listing is sold by a third-party marketplace seller (*KitchenDealz Marketplace*). NovaMart matches Amazon prices only when the item is Sold and Shipped by Amazon.com (POL-PRC-005, Section 2.1 and Section 4.1).\n* **Best Buy Listing ($105.00):** **Approved.** Best Buy is an authorized competitor, sold first-party, and currently in stock (POL-PRC-005, Section 2.2 and Section 3).\n\n### Calculation\n* NovaMart Regular Price: $120.00\n* Matched Best Buy Price: $105.00\n* **Customer Discount:** $15.00 off regular price (Final sales price: $105.00 + applicable local sales tax).\n\n---\n\n### POS Steps for Store Associate\n1. Confirm on the customer's device or official Best Buy app/website at the register that `PROD-101` is currently in stock at Best Buy for $105.00 (POL-PRC-005, Section 3.4).\n2. Scan `PROD-101` at the register.\n3. Select **Price Override / Price Match** > **Competitor Match**.\n4. Select **Best Buy** as the authorized competitor.\n5. Override the item price to **$105.00**.\n6. Complete the checkout transaction and hand the customer their receipt.",
+      "latency_s": 38.27,
+      "llm_calls": 2,
+      "attempts": 2,
+      "model": "gemini-3.6-flash",
+      "run_at": "2026-10-19T05:40:16+00:00"
+    },
+    {
+      "id": "TC09",
+      "scenario": "BOPIS one-time 48-hour hold extension (self-service)",
+      "prompt": "The customer for BOPIS order ORD-1007 called and can't pick up until next week. Can we hold it longer?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "BOPIS hold policy hold extension window"
+          },
+          "result_status": "SUCCESS"
+        },
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "ORD-1007"
+          },
+          "result_status": "FOUND"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "policy_ids_cited": {
+          "passed": true,
+          "detail": "cited=['POL-ORD-003', 'SOP-OPS-007'] missing=[]"
+        },
+        "keywords_present": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "1478 chars"
+        }
+      },
+      "response": "**Self-service: Grant a one-time 48-hour BOPIS hold extension in-store.**\n\n### Key Facts\n* **Order ID:** ORD-1007\n* **Item:** Heritage Pre-Seasoned Cast Iron Cocotte (PROD-404, $85.00)\n* **Ready for Pickup Date:** 2026-10-14 (Day 4 of 5-day standard hold)\n* **Current Hold Expiration:** End of day on 2026-10-19\n* **Extension Status:** No prior extension granted (`extension_granted: false`)\n\n---\n\n### In-Store Resolution & POS Instructions\n\n1. **Apply Hold Extension in POS:**\n   * Select order `ORD-1007` in the POS terminal.\n   * Apply the **48-Hour BOPIS Hold Extension**.\n   * The new hold expiration date is **end of day on Wednesday, October 21, 2026**.\n\n2. **Customer Communication:**\n   * Inform the customer that NovaMart policy permits a **maximum one-time 48-hour extension** beyond the standard 5-day window (POL-ORD-003, Section 2.3 & 2.4).\n   * Advise them that they must pick up the order by **October 21, 2026**.\n   * Note that if it is not picked up by the end of October 21, the system will automatically cancel the order and refund the payment to the original payment method (POL-ORD-003, Section 2.2).\n\n---\n\n### Policy Citations\n* **POL-ORD-003, Section 2.1–2.5:** Standard 5-day hold period, single 48-hour extension rule prior to expiration, auto-cancellation, and prohibition of escalating hold extensions to Operations.\n* **SOP-OPS-007, Section 2.3:** BOPIS 48-hour hold extensions are store self-service actions and must not be escalated to Operations.",
+      "latency_s": 15.92,
+      "llm_calls": 2,
+      "attempts": 1,
+      "model": "gemini-3.6-flash",
+      "run_at": "2026-10-19T05:40:16+00:00"
+    },
+    {
+      "id": "TC10",
+      "scenario": "Out-of-scope abstention (HR: sick leave / PTO balance)",
+      "prompt": "How many sick days and PTO hours do I have left this year?",
+      "status": "PASS",
+      "tool_trajectory": [
+        {
+          "name": "search_policy_docs",
+          "args": {
+            "query": "sick days PTO paid time off HR policy"
+          },
+          "result_status": "SUCCESS"
+        }
+      ],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "abstained": {
+          "passed": true,
+          "detail": "matched='not (?:part of|included in|covered (?:by|in)|in) (?:the |our )?(?:novamart )?(?:store )?(?:operations )?knowledge base'"
+        },
+        "no_fabricated_policy": {
+          "passed": true,
+          "detail": "cited=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "299 chars"
+        }
+      },
+      "response": "I cannot answer this question. Information regarding paid time off (PTO) and sick leave is not part of the NovaMart store operations knowledge base. \n\nPlease contact your store's Human Resources (HR) representative or check your employee HR portal for assistance with your PTO and sick day balances.",
+      "latency_s": 9.75,
+      "llm_calls": 2,
+      "attempts": 1,
+      "model": "gemini-3.6-flash",
+      "run_at": "2026-10-19T05:40:16+00:00"
+    },
+    {
+      "id": "TC11",
+      "scenario": "Out-of-scope abstention (IT: jammed receipt printer)",
+      "prompt": "The receipt printer at register 3 keeps jamming. How do I fix it?",
+      "status": "PASS",
+      "tool_trajectory": [],
+      "tickets_created": [],
+      "checks": {
+        "expected_tools_called": {
+          "passed": true,
+          "detail": "missing=[]"
+        },
+        "no_forbidden_tools": {
+          "passed": true,
+          "detail": "called=[]"
+        },
+        "abstained": {
+          "passed": true,
+          "detail": "matched='not (?:part of|included in|covered (?:by|in)|in) (?:the |our )?(?:novamart )?(?:store )?(?:operations )?knowledge base'"
+        },
+        "no_fabricated_policy": {
+          "passed": true,
+          "detail": "cited=[]"
+        },
+        "no_ticket_created": {
+          "passed": true,
+          "detail": "tickets=[]"
+        },
+        "non_empty_response": {
+          "passed": true,
+          "detail": "289 chars"
+        }
+      },
+      "response": "I am unable to assist with this request. Information regarding IT or hardware troubleshooting—including issues with POS terminals, receipt printers, or scanners—is not part of the NovaMart store operations knowledge base. Please contact the IT Help Desk for assistance with this equipment.",
+      "latency_s": 2.77,
+      "llm_calls": 1,
+      "attempts": 1,
+      "model": "gemini-3.1-flash-lite",
+      "run_at": "2026-10-19T05:40:39+00:00"
+    }
+  ]
+}
